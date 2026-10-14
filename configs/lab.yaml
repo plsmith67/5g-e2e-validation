@@ -1,0 +1,39 @@
+# Lab settings for the 5G SA end-to-end validation suite.
+# These are safe public defaults that match a fresh Open5GS install and UERANSIM's examples.
+# Do not put private lab values here. Put them in configs/lab.local.yaml instead
+# (copy configs/lab.local.example.yaml). That file is ignored by Git and overrides this one.
+
+lab:
+  name: home-5g-sa
+  ueransim_dir: ~/UERANSIM        # where UERANSIM was cloned and built
+  use_sudo: true                  # nr-ue needs root to create its TUN interface
+
+network:
+  mcc: "999"
+  mnc: "70"
+  tac: 1
+  amf_ngap_ip: 127.0.0.5          # Open5GS AMF default N2 address
+  gnb_ip: 127.0.0.1               # address the simulated gNB binds to
+  dnn: internet                   # the DNN (APN) the device should land on
+  sst: 1                          # slice/service type
+  ip_pool: 10.45.0.0/16           # UE IP pool configured on the Open5GS SMF/UPF
+
+subscriber:                       # must exist in Open5GS (scripts/03_add_subscriber.sh)
+  imsi: "999700000000001"
+  key: 465B5CE8B199B49FAA5F0A2EE238A6BC
+  opc: E8ED289DEBA952E4283B54E88E6183CA
+
+negative:
+  wrong_dnn: notarealdnn          # expect PDU session reject (5GSM cause #27)
+  unknown_imsi: "999700000009999" # NOT provisioned, expect registration reject
+
+thresholds:                       # pass criteria, in seconds unless noted
+  gnb_ng_setup: 15
+  rrc_connected: 15
+  registration: 20
+  pdu_session: 20
+  negative_wait: 20               # how long a negative test waits before calling it
+  ping_target: 8.8.8.8            # reached through the UPF (N6)
+  ping_count: 10
+  max_loss_pct: 10
+  max_avg_rtt_ms: 150

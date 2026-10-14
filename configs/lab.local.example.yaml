@@ -1,0 +1,16 @@
+# Copy this file to configs/lab.local.yaml and fill in your private lab values.
+# lab.local.yaml is listed in .gitignore, so it is never committed or pushed.
+# Only include the settings that differ from configs/lab.yaml. Delete the rest.
+
+network:
+  mcc: "001"
+  mnc: "01"
+  amf_ngap_ip: 10.0.0.5        # your AMF N2 address
+  gnb_ip: 10.0.0.20            # address the simulated gNB should use
+  dnn: iot                     # your DNN
+  ip_pool: 10.60.0.0/16        # the UE pool on your SMF/UPF
+
+subscriber:
+  imsi: "001010000000001"
+  key: 00000000000000000000000000000000
+  opc: 00000000000000000000000000000000

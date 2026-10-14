@@ -1,0 +1,5 @@
+results/
+configs/*.local.yaml
+.venv/
+__pycache__/
+scripts/.open5gs-dbctl
